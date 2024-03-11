@@ -1,0 +1,317 @@
+{
+  "version": 8,
+  "name": "Positron",
+  "metadata": {
+    "mapbox:autocomposite": false,
+    "mapbox:type": "template",
+    "openmaptiles:mapbox:owner": "openmaptiles",
+    "openmaptiles:mapbox:source:url": "mapbox://openmaptiles.4qljc88t",
+    "openmaptiles:version": "3.x",
+    "maputnik:renderer": "mbgljs"
+  },
+  "sources": {
+    "composite": {
+      "url": "mapbox://mapbox.mapbox-streets-v8,mapbox.mapbox-terrain-v2,mapbox.mapbox-bathymetry-v2",
+      "type": "vector"
+    },
+    "custom-image":{
+      "type": "image",
+      "url": "/src/assets/images/culture1.jpg",
+      "coordinates": [
+        [0, 80],
+        [180, 80],
+        [180, -77],
+        [0, -77]
+        ]
+    },
+    "house_hjpx":{
+      "type": "image",
+      "url": "/src/assets/images/hjpx.png",
+      "coordinates": [
+        [32, 72.4],
+        [46, 72.4],
+        [46, 66.6],
+        [32, 66.6]
+      ]
+    },
+    "house_xdsz":{
+      "type": "image",
+      "url": "/src/assets/images/xdsz.png",
+      "coordinates": [
+        [62, 71.3],
+        [78.5, 71.3],
+        [78.5, 64],
+        [62, 64]
+      ]
+    },
+    "house_qdhz":{
+      "type": "image",
+      "url": "/src/assets/images/qdhz.png",
+      "coordinates": [
+        [22.8, 62],
+        [56.2, 62],
+        [56.2, 54.5],
+        [22.8, 54.5]
+      ]
+    },
+    "house_qdhf":{
+      "type": "image",
+      "url": "/src/assets/images/qdhf.png",
+      "coordinates": [
+        [46.2, 50.7],
+        [86.5, 50.7],
+        [86.5, 38],
+        [46.2, 38]
+      ]
+    },
+    "restaurant":{
+      "type": "image",
+      "url": "/src/assets/images/restaurant.png",
+      "coordinates": [
+        [120.2, 55.9],
+        [156.1, 55.9],
+        [156.1, 38.8],
+        [120.2, 38.8]
+      ]
+    },
+    "custom_literature":{
+      "type": "image",
+      "url": "/src/assets/images/custom_literature.png",
+      "coordinates": [
+        [65.1, -65.6],
+        [77.3, -65.6],
+        [77.3, -69.9],
+        [65.1, -69.9]
+      ]
+    },
+    "custom_skill":{
+      "type": "image",
+      "url": "/src/assets/images/custom_skill.png",
+      "coordinates": [
+        [148.6, -33.4],
+        [161.2, -33.4],
+        [161.2, -42.5],
+        [148.6, -42.5]
+      ]
+    },
+    "custom_medicine":{
+      "type": "image",
+      "url": "/src/assets/images/custom_medicine.png",
+      "coordinates": [
+        [120, -45.6],
+        [139, -45.6],
+        [139, -55.6],
+        [120, -55.6]
+      ]
+    },
+    "custom_acrobatics":{
+      "type": "image",
+      "url": "/src/assets/images/custom_acrobatics.png",
+      "coordinates": [
+        [80.1, -36],
+        [90.3, -36],
+        [90.3, -46.6],
+        [80.1, -46.6]
+      ]
+    },
+    "custom_drama":{
+      "type": "image",
+      "url": "/src/assets/images/custom_drama.png",
+      "coordinates": [
+        [57.5, -46],
+        [68.5, -46],
+        [68.5, -57.6],
+        [57.5, -57.6]
+      ]
+    },
+    "custom_art":{
+      "type": "image",
+      "url": "/src/assets/images/custom_art.png",
+      "coordinates": [
+        [20, -43.6],
+        [36, -43.6],
+        [36, -54.5],
+        [20, -54.5]
+      ]
+    },
+    "custom_clothes":{
+      "type": "image",
+      "url": "/src/assets/images/custom_clothes.png",
+      "coordinates": [
+        [85, 0],
+        [97.2, 0],
+        [97.2, -18.3],
+        [85, -18.3]
+      ]
+    },
+    "custom_music":{
+      "type": "image",
+      "url": "/src/assets/images/custom_music.png",
+      "coordinates": [
+        [65.2, 18],
+        [84.2, 18],
+        [84.2, -1.5],
+        [65.2, -1.5]
+      ]
+    },
+    "custom_temple":{
+      "type": "image",
+      "url": "/src/assets/images/custom_temple.png",
+      "coordinates": [
+        [12, 11.1],
+        [46.6, 11.1],
+        [46.6, -13.4],
+        [12, -13.4]
+      ]
+    }
+
+
+  },
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {"background-color": "rgb(193,210,226)"}
+    },
+    {
+
+        "id": "suzhou-layer",
+        "type": "raster",
+        "source": "custom-image",
+        "paint": {
+          "raster-fade-duration": 0
+        }
+    },
+    {
+
+      "id": "house_hjpx",
+      "type": "raster",
+      "source": "house_hjpx",
+      "paint": {
+        "raster-fade-duration": 0
+      },
+      "interactive": true
+    },
+    {
+      "id": "house_xdsz",
+      "type": "raster",
+      "source": "house_xdsz",
+      "paint": {
+        "raster-fade-duration": 0
+      },
+      "interactive": true
+
+    },
+    {
+      "id": "house_qdhz",
+      "type": "raster",
+      "source": "house_qdhz",
+      "paint": {
+        "raster-fade-duration": 0
+      },
+      "interactive": true
+    },
+    {
+      "id": "house_qdhf",
+      "type": "raster",
+      "source": "house_qdhf",
+      "paint": {
+        "raster-fade-duration": 0
+      },
+      "interactive": true
+    },
+    {
+      "id": "restaurant",
+      "type": "raster",
+      "source": "restaurant",
+      "paint": {
+        "raster-fade-duration": 0
+      },
+      "interactive": true
+    },
+    {
+      "id": "custom_literature",
+      "type": "raster",
+      "source": "custom_literature",
+      "paint": {
+        "raster-fade-duration": 0
+      },
+      "interactive": true
+    },
+    {
+      "id": "custom_skill",
+      "type": "raster",
+      "source": "custom_skill",
+      "paint": {
+        "raster-fade-duration": 0
+      },
+      "interactive": true
+    },
+    {
+      "id": "custom_medicine",
+      "type": "raster",
+      "source": "custom_medicine",
+      "paint": {
+        "raster-fade-duration": 0
+      },
+      "interactive": true
+    },
+    {
+      "id": "custom_acrobatics",
+      "type": "raster",
+      "source": "custom_acrobatics",
+      "paint": {
+        "raster-fade-duration": 0
+      },
+      "interactive": true
+    },
+    {
+      "id": "custom_drama",
+      "type": "raster",
+      "source": "custom_drama",
+      "paint": {
+        "raster-fade-duration": 0
+      },
+      "interactive": true
+    },
+    {
+      "id": "custom_art",
+      "type": "raster",
+      "source": "custom_art",
+      "paint": {
+        "raster-fade-duration": 0
+      },
+      "interactive": true
+    },
+    {
+      "id": "custom_clothes",
+      "type": "raster",
+      "source": "custom_clothes",
+      "paint": {
+        "raster-fade-duration": 0
+      },
+      "interactive": true
+    },
+    {
+      "id": "custom_music",
+      "type": "raster",
+      "source": "custom_music",
+      "paint": {
+        "raster-fade-duration": 0
+      },
+      "interactive": true
+    },
+    {
+      "id": "custom_temple",
+      "type": "raster",
+      "source": "custom_temple",
+      "paint": {
+        "raster-fade-duration": 0
+      },
+      "interactive": true
+    }
+
+
+  ],
+  "id": "positron"
+}

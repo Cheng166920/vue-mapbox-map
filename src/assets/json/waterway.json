@@ -1,0 +1,143 @@
+{
+  "version": 8,
+  "name": "Positron",
+  "metadata": {
+    "mapbox:autocomposite": false,
+    "mapbox:type": "template",
+    "openmaptiles:mapbox:owner": "openmaptiles",
+    "openmaptiles:mapbox:source:url": "mapbox://openmaptiles.4qljc88t",
+    "openmaptiles:version": "3.x",
+    "maputnik:renderer": "mbgljs"
+  },
+  "sources": {
+    "composite": {
+      "url": "mapbox://mapbox.mapbox-streets-v8,mapbox.mapbox-terrain-v2,mapbox.mapbox-bathymetry-v2",
+      "type": "vector"
+    },
+    "waterway_connection": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Awaterway_connection@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 18
+    },
+    "waterway_site": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Awaterway_site@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 18
+    }
+  },
+  "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {"background-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "waterway_connection",
+      "type": "fill",
+      "source": "waterway_connection",
+      "source-layer": "waterway_connection",
+      "paint": {"fill-color": "rgba(112,185,188, 1)"}
+    },
+    {
+      "id": "waterway_site",
+      "type": "circle",
+      "source": "waterway_site",
+      "source-layer": "waterway_site",
+      "paint": {
+        "circle-color": "rgba(255, 255, 255, 1)",
+        "circle-stroke-color": "rgba(131,183,180, 1)",
+        "circle-blur": 0,
+        "circle-stroke-width": 2,
+        "circle-radius": 7
+      }
+    },
+    {
+      "id": "waterway_site_level",
+      "type": "circle",
+      "source": "waterway_site",
+      "source-layer": "waterway_site",
+      "filter": ["all", ["==", "level", 1]],
+      "paint": {
+        "circle-color": "rgba(128,178,174, 1)",
+        "circle-stroke-color": "rgba(255, 255, 255, 1)",
+        "circle-radius": 4,
+        "circle-stroke-width": 2
+      }
+    },
+    {
+      "id": "waterway_site_suzhou_border",
+      "type": "circle",
+      "source": "waterway_site",
+      "source-layer": "waterway_site",
+      "filter": ["all", ["==", "name", "苏州府"]],
+      "paint": {
+        "circle-color": "rgba(255, 255, 255, 1)",
+        "circle-stroke-color": "rgba(36,149,131, 1)",
+        "circle-blur": 0,
+        "circle-stroke-width": 2,
+        "circle-radius": 8
+      }
+    },
+    {
+      "id": "waterway_site_suzhou",
+      "type": "circle",
+      "source": "waterway_site",
+      "source-layer": "waterway_site",
+      "filter": ["all", ["==", "name", "苏州府"]],
+      "paint": {
+        "circle-color": "rgba(36,149,131, 1)",
+        "circle-stroke-color": "rgba(255, 255, 255, 1)",
+        "circle-radius": 4.5,
+        "circle-stroke-width": 2
+      }
+    },
+    {
+      "id": "waterway_site_label_other",
+      "type": "symbol",
+      "source": "waterway_site",
+      "source-layer": "waterway_site",
+      "filter": ["none", ["==", "level", 1]],
+      "layout": {
+        "text-size": 16,
+        "text-field": ["get", "name"],
+        "text-letter-spacing": 0.1,
+        "text-offset": [2, -1],
+        "text-allow-overlap": false,
+        "text-ignore-placement": false,
+        "text-keep-upright": false,
+        "text-optional": true
+      },
+      "paint": {"text-color": "rgba(143,108,114, 1)"}
+    },
+    {
+      "id": "waterway_site_label",
+      "type": "symbol",
+      "source": "waterway_site",
+      "source-layer": "waterway_site",
+      "filter": ["all", ["==", "level", 1]],
+      "layout": {
+        "text-size": 18,
+        "text-field": ["get", "name"],
+        "text-letter-spacing": 0.1,
+        "text-offset": [0, 1],
+        "icon-allow-overlap": true,
+        "text-allow-overlap": true
+      },
+      "paint": {
+        "text-color": "rgba(116,33,43, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1.5
+      }
+    }
+  ],
+  "id": "positron"
+}

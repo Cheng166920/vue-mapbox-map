@@ -1,0 +1,625 @@
+{
+  "version": 8,
+  "name": "Positron",
+  "metadata": {
+    "mapbox:autocomposite": false,
+    "mapbox:type": "template",
+    "openmaptiles:mapbox:owner": "openmaptiles",
+    "openmaptiles:mapbox:source:url": "mapbox://openmaptiles.4qljc88t",
+    "openmaptiles:version": "3.x",
+    "maputnik:renderer": "mbgljs"
+  },
+  "sources": {
+    "composite": {
+      "url": "mapbox://mapbox.mapbox-streets-v8,mapbox.mapbox-terrain-v2,mapbox.mapbox-bathymetry-v2",
+      "type": "vector"
+    },
+    "wucheng_grey": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Awucheng_grey@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "wucheng_blue": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Awucheng_blue@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "wucheng_blue_under": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Awucheng_blue_under@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 18
+    },
+    "canal_gate": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Acanal_gate@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "canal_arrow": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Acanal_arrow@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "canal_bridge": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Acanal_bridge@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "canal_city_icon": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Acanal_city_icon@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "canal_city_line": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Acanal_city_line@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "canal_mountain": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Acanal_mountain@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "canal_line": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Acanal_line@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "canal_large_line": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Acanal_large_line@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "canal_city": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Acanal_city@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "canal_point": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Acanal_point@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    }
+  },
+  "sprite": "mapbox://styles/key563/clqlr5p4200pl01qrcbkac1h1",
+  "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {"background-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "canal_city",
+      "type": "line",
+      "source": "canal_city",
+      "source-layer": "canal_city",
+      "maxzoom": 12,
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(138,138,138, 1)", "line-width": 3}
+    },
+    {
+      "id": "canal_city_border",
+      "type": "line",
+      "source": "canal_city",
+      "source-layer": "canal_city",
+      "maxzoom": 12,
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-width": 3,
+        "line-color": "rgba(138,138,138, 1)",
+        "line-offset": -2,
+        "line-dasharray": [1, 1]
+      }
+    },
+    {
+      "id": "canal_line",
+      "type": "line",
+      "source": "canal_line",
+      "source-layer": "canal_line",
+      "maxzoom": 12,
+      "filter": ["all", ["==", "FID_", 0]],
+      "paint": {"line-color": "rgba(226,190,171, 1)", "line-width": 6}
+    },
+    {
+      "id": "canal_line_water",
+      "type": "line",
+      "source": "canal_line",
+      "source-layer": "canal_line",
+      "maxzoom": 12,
+      "filter": ["all", ["==", "FID_", 1]],
+      "paint": {"line-color": "rgba(203,213,215, 1)", "line-width": 16}
+    },
+    {
+      "id": "canal_city_label",
+      "type": "symbol",
+      "source": "canal_city_line",
+      "source-layer": "canal_city_line",
+      "minzoom": 10.5,
+      "maxzoom": 12,
+      "layout": {
+        "text-field": ["get", "name"],
+        "visibility": "visible",
+        "text-max-width": 2,
+        "text-anchor": "bottom",
+        "text-offset": [0, -1],
+        "text-allow-overlap": true
+      },
+      "paint": {"text-color": "rgba(111,21,28, 1)"}
+    },
+    {
+      "id": "canal_point_icon",
+      "type": "symbol",
+      "source": "canal_point",
+      "source-layer": "canal_point",
+      "maxzoom": 12,
+      "layout": {
+        "icon-image": "point_icon",
+        "icon-allow-overlap": true,
+        "icon-size": 1,
+        "visibility": "visible"
+      }
+    },
+    {
+      "id": "canal_point_label",
+      "type": "symbol",
+      "source": "canal_point",
+      "source-layer": "canal_point",
+      "maxzoom": 12,
+      "filter": ["all", ["!=", "name", "自然风景区"], ["!=", "name", "枫桥"]],
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-anchor": "bottom-right",
+        "text-offset": [-1, -0.3],
+        "visibility": "visible"
+      }
+    },
+    {
+      "id": "canal_point_label_fengqiao",
+      "type": "symbol",
+      "source": "canal_point",
+      "source-layer": "canal_point",
+      "maxzoom": 12,
+      "filter": ["all", ["==", "name", "枫桥"]],
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-anchor": "bottom-left",
+        "text-offset": [1, -0.3],
+        "visibility": "visible"
+      }
+    },
+    {
+      "id": "canal_mountain_label",
+      "type": "symbol",
+      "source": "canal_city_icon",
+      "source-layer": "canal_city_icon",
+      "maxzoom": 12,
+      "filter": ["all", ["==", "name", "虎丘"]],
+      "layout": {
+        "text-field": ["get", "name"],
+        "visibility": "visible",
+        "text-anchor": "top",
+        "text-offset": [0, 1],
+        "text-allow-overlap": true
+      },
+      "paint": {"text-color": "rgba(44,104,51, 1)"}
+    },
+    {
+      "id": "canal_city_icon-copy-copy",
+      "type": "symbol",
+      "source": "canal_city_icon",
+      "source-layer": "canal_city_icon",
+      "minzoom": 0,
+      "maxzoom": 12,
+      "filter": ["all", ["==", "name", ""]],
+      "layout": {
+        "visibility": "visible",
+        "icon-image": "bridge_icon",
+        "icon-size": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          9,
+          0.3,
+          10,
+          0.5,
+          11,
+          1
+        ]
+      }
+    },
+    {
+      "id": "canal_city_icon-copy",
+      "type": "symbol",
+      "source": "canal_city_icon",
+      "source-layer": "canal_city_icon",
+      "minzoom": 0,
+      "maxzoom": 12,
+      "filter": ["all", ["==", "name", "虎丘"]],
+      "layout": {
+        "visibility": "visible",
+        "icon-image": "mountain_icon",
+        "icon-size": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          9,
+          0.2,
+          10,
+          0.4,
+          11,
+          0.9
+        ]
+      }
+    },
+    {
+      "id": "canal_city_icon",
+      "type": "symbol",
+      "source": "canal_city_icon",
+      "source-layer": "canal_city_icon",
+      "minzoom": 0,
+      "maxzoom": 12,
+      "filter": ["all", ["==", "name", "城市景观"]],
+      "layout": {
+        "visibility": "visible",
+        "icon-image": "gate_icon",
+        "icon-size": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          9,
+          0.3,
+          10,
+          0.5,
+          11,
+          1
+        ]
+      }
+    },
+    {
+      "id": "canal_arrow",
+      "type": "line",
+      "source": "canal_arrow",
+      "source-layer": "canal_arrow",
+      "maxzoom": 12,
+      "paint": {"line-color": "rgba(232, 213, 199, 1)"}
+    },
+    {
+      "id": "large_canal_line",
+      "type": "line",
+      "source": "canal_large_line",
+      "source-layer": "canal_large_line",
+      "minzoom": 12,
+      "paint": {"line-color": "rgba(197,215,217, 1)", "line-width": 6}
+    },
+    {
+      "id": "large_canal_city",
+      "type": "line",
+      "source": "canal_city_line",
+      "source-layer": "canal_city_line",
+      "minzoom": 12,
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(138,138,138, 1)", "line-width": 3}
+    },
+    {
+      "id": "large_canal_bridge_label",
+      "type": "symbol",
+      "source": "canal_bridge",
+      "source-layer": "canal_bridge",
+      "minzoom": 12,
+      "filter": [
+        "all",
+        ["!=", "name", "渡僧桥"],
+        ["!=", "name", "斟酌桥"],
+        ["!=", "name", "桐桥"],
+        ["!=", "name", "半塘桥"]
+      ],
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-offset": [-2.8, 0],
+        "visibility": "visible",
+        "text-allow-overlap": true
+      },
+      "paint": {"text-color": "rgba(89,87,87, 1)"}
+    },
+    {
+      "id": "large_canal_bridge_label_other-copy",
+      "type": "symbol",
+      "source": "canal_bridge",
+      "source-layer": "canal_bridge",
+      "minzoom": 12,
+      "filter": ["all", ["in", "name", "斟酌桥", "桐桥", "半塘桥"]],
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-offset": [2.5, 0],
+        "visibility": "visible",
+        "text-allow-overlap": true
+      },
+      "paint": {"text-color": "rgba(89,87,87, 1)"}
+    },
+    {
+      "id": "large_canal_bridge_label_other",
+      "type": "symbol",
+      "source": "canal_bridge",
+      "source-layer": "canal_bridge",
+      "minzoom": 12,
+      "filter": ["all", ["==", "name", "渡僧桥"]],
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-offset": [-2, 1],
+        "visibility": "visible",
+        "text-allow-overlap": true
+      },
+      "paint": {"text-color": "rgba(89,87,87, 1)"}
+    },
+    {
+      "id": "large_canal_water_label",
+      "type": "symbol",
+      "source": "canal_large_line",
+      "source-layer": "canal_large_line",
+      "minzoom": 12,
+      "filter": ["none", ["==", "name", "上塘河（阊门运河）"], ["==", "name", "山塘河"]],
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-font": ["DIN Pro Regular"],
+        "symbol-placement": "line",
+        "symbol-z-order": "viewport-y",
+        "symbol-avoid-edges": false,
+        "text-ignore-placement": true,
+        "text-pitch-alignment": "auto",
+        "text-anchor": "top",
+        "text-justify": "center",
+        "text-transform": "none",
+        "text-allow-overlap": true,
+        "text-rotation-alignment": "auto",
+        "icon-pitch-alignment": "auto",
+        "icon-anchor": "center",
+        "text-keep-upright": true,
+        "text-max-width": 10,
+        "text-rotate": 0,
+        "text-padding": 0,
+        "text-letter-spacing": 1,
+        "text-size": 16,
+        "text-max-angle": 2000,
+        "text-offset": [-2, 0],
+        "text-optional": false,
+        "text-radial-offset": 0,
+        "icon-allow-overlap": false,
+        "icon-offset": [0, 0],
+        "icon-keep-upright": false,
+        "visibility": "visible",
+        "text-line-height": 2,
+        "symbol-spacing": 200
+      },
+      "paint": {
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-color": "rgba(146,179,196, 1)",
+        "text-halo-width": 0,
+        "text-translate-anchor": "map",
+        "text-translate": [0, 0]
+      }
+    },
+    {
+      "id": "large_canal_water_label_other-copy",
+      "type": "symbol",
+      "source": "canal_large_line",
+      "source-layer": "canal_large_line",
+      "minzoom": 12,
+      "filter": ["all", ["==", "name", "山塘河"]],
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-font": ["DIN Pro Regular"],
+        "symbol-placement": "line",
+        "symbol-z-order": "viewport-y",
+        "symbol-avoid-edges": false,
+        "text-ignore-placement": true,
+        "text-pitch-alignment": "auto",
+        "text-anchor": "top",
+        "text-justify": "auto",
+        "text-transform": "none",
+        "text-allow-overlap": true,
+        "text-rotation-alignment": "auto",
+        "icon-pitch-alignment": "auto",
+        "icon-anchor": "center",
+        "text-keep-upright": true,
+        "text-max-width": 10,
+        "text-rotate": 0,
+        "text-padding": 0,
+        "text-letter-spacing": 1,
+        "text-size": 16,
+        "symbol-spacing": 1000,
+        "text-max-angle": 2000,
+        "text-offset": [5, 0],
+        "text-optional": false,
+        "text-radial-offset": 0,
+        "icon-allow-overlap": false,
+        "icon-offset": [0, 0],
+        "icon-keep-upright": false,
+        "visibility": "visible",
+        "text-line-height": 2
+      },
+      "paint": {
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-color": "rgba(146,179,196, 1)",
+        "text-halo-width": 0,
+        "text-translate-anchor": "map",
+        "text-translate": [0, 0]
+      }
+    },
+    {
+      "id": "large_canal_water_label_other",
+      "type": "symbol",
+      "source": "canal_large_line",
+      "source-layer": "canal_large_line",
+      "minzoom": 12,
+      "filter": ["all", ["==", "name", "上塘河（阊门运河）"]],
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-font": ["DIN Pro Regular"],
+        "symbol-placement": "line",
+        "symbol-z-order": "viewport-y",
+        "symbol-avoid-edges": false,
+        "text-ignore-placement": true,
+        "text-pitch-alignment": "auto",
+        "text-anchor": "top",
+        "text-justify": "auto",
+        "text-transform": "none",
+        "text-allow-overlap": true,
+        "text-rotation-alignment": "auto",
+        "icon-pitch-alignment": "auto",
+        "icon-anchor": "center",
+        "text-keep-upright": true,
+        "text-max-width": 10,
+        "text-rotate": 0,
+        "text-padding": 0,
+        "text-letter-spacing": 0.5,
+        "text-size": 16,
+        "symbol-spacing": 1000,
+        "text-max-angle": 2000,
+        "text-offset": [0, 0],
+        "text-optional": false,
+        "text-radial-offset": 0,
+        "icon-allow-overlap": false,
+        "icon-offset": [0, 0],
+        "icon-keep-upright": false,
+        "visibility": "visible",
+        "text-line-height": 2
+      },
+      "paint": {
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-color": "rgba(146,179,196, 1)",
+        "text-halo-width": 0,
+        "text-translate-anchor": "map",
+        "text-translate": [0, 0]
+      }
+    },
+    {
+      "id": "large_canal_gate_label",
+      "type": "symbol",
+      "source": "canal_gate",
+      "source-layer": "canal_gate",
+      "minzoom": 12,
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-anchor": "center",
+        "text-offset": [2, -1.5],
+        "visibility": "visible"
+      },
+      "paint": {"text-color": "rgba(129,91,38, 1)"}
+    },
+    {
+      "id": "large_canal_mountain_label",
+      "type": "symbol",
+      "source": "canal_mountain",
+      "source-layer": "canal_mountain",
+      "minzoom": 12,
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-offset": [0, -1.8],
+        "visibility": "visible"
+      },
+      "paint": {"text-color": "rgba(45,106,52, 1)"}
+    },
+    {
+      "id": "large_bridge_icon",
+      "type": "symbol",
+      "source": "canal_bridge",
+      "source-layer": "canal_bridge",
+      "minzoom": 12,
+      "layout": {
+        "icon-image": "bridge_icon",
+        "icon-size": 0.6,
+        "icon-allow-overlap": true
+      }
+    },
+    {
+      "id": "large_mountain_icon",
+      "type": "symbol",
+      "source": "canal_mountain",
+      "source-layer": "canal_mountain",
+      "minzoom": 12,
+      "layout": {"icon-image": "mountain_icon", "icon-size": 0.5}
+    },
+    {
+      "id": "large_gate_icon",
+      "type": "symbol",
+      "source": "canal_gate",
+      "source-layer": "canal_gate",
+      "minzoom": 12,
+      "layout": {"icon-image": "gate_icon", "icon-size": 0.8}
+    },
+    {
+      "id": "large_city_label",
+      "type": "symbol",
+      "source": "canal_city_line",
+      "source-layer": "canal_city_line",
+      "minzoom": 12,
+      "layout": {
+        "text-field": ["get", "name"],
+        "symbol-placement": "point",
+        "symbol-avoid-edges": false,
+        "text-max-width": 1,
+        "text-allow-overlap": true,
+        "text-anchor": "center",
+        "text-justify": "center",
+        "text-rotation-alignment": "map",
+        "text-pitch-alignment": "map",
+        "text-optional": true,
+        "text-offset": [-1, -4]
+      },
+      "paint": {"text-color": "rgba(111,21,28, 1)"}
+    }
+  ],
+  "id": "positron"
+}

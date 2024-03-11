@@ -1,0 +1,653 @@
+{
+  "version": 8,
+  "name": "Streets",
+  "metadata": {
+    "mapbox:type": "template",
+    "maputnik:renderer": "mbgljs",
+    "mapbox:origin": "streets-v12",
+    "mapbox:sdk-support": {"js": "3.0.0", "android": "11.0.0", "ios": "11.0.0"},
+    "mapbox:autocomposite": true,
+    "mapbox:groups": {
+      "Land & water, land": {"name": "Land & water, land", "collapsed": true},
+      "Land & water, water": {"name": "Land & water, water", "collapsed": true},
+      "Land & water, built": {"name": "Land & water, built", "collapsed": true},
+      "Transit, built": {"name": "Transit, built", "collapsed": true},
+      "Buildings, built": {"name": "Buildings, built", "collapsed": true},
+      "Walking, cycling, etc., tunnels": {
+        "name": "Walking, cycling, etc., tunnels",
+        "collapsed": true
+      },
+      "Road network, tunnels": {
+        "name": "Road network, tunnels",
+        "collapsed": true
+      },
+      "Walking, cycling, etc., surface": {
+        "name": "Walking, cycling, etc., surface",
+        "collapsed": true
+      },
+      "Road network, surface": {
+        "name": "Road network, surface",
+        "collapsed": true
+      },
+      "Transit, surface": {"name": "Transit, surface", "collapsed": true},
+      "Walking, cycling, etc., barriers-bridges": {
+        "name": "Walking, cycling, etc., barriers-bridges",
+        "collapsed": true
+      },
+      "Road network, bridges": {
+        "name": "Road network, bridges",
+        "collapsed": true
+      },
+      "Transit, bridges": {"name": "Transit, bridges", "collapsed": true},
+      "Administrative boundaries, admin": {
+        "name": "Administrative boundaries, admin",
+        "collapsed": true
+      },
+      "Buildings, building-labels": {
+        "name": "Buildings, building-labels",
+        "collapsed": true
+      },
+      "Road network, road-labels": {
+        "name": "Road network, road-labels",
+        "collapsed": true
+      },
+      "Walking, cycling, etc., walking-cycling-labels": {
+        "name": "Walking, cycling, etc., walking-cycling-labels",
+        "collapsed": true
+      },
+      "Transit, ferry-aerialway-labels": {
+        "name": "Transit, ferry-aerialway-labels",
+        "collapsed": true
+      },
+      "Natural features, natural-labels": {
+        "name": "Natural features, natural-labels",
+        "collapsed": true
+      },
+      "Point of interest labels, poi-labels": {
+        "name": "Point of interest labels, poi-labels",
+        "collapsed": true
+      },
+      "Transit, transit-labels": {
+        "name": "Transit, transit-labels",
+        "collapsed": true
+      },
+      "Place labels, place-labels": {
+        "name": "Place labels, place-labels",
+        "collapsed": true
+      }
+    },
+    "mapbox:decompiler": {
+      "id": "streets-v12",
+      "componentVersion": "18.0.0",
+      "strata": [
+        {
+          "id": "streets-v12",
+          "order": [
+            ["land-and-water", "land"],
+            ["land-and-water", "water"],
+            ["land-and-water", "built"],
+            ["transit", "built"],
+            ["buildings", "built"],
+            ["walking-cycling", "tunnels"],
+            ["road-network", "tunnels"],
+            ["walking-cycling", "surface"],
+            ["road-network", "surface"],
+            ["transit", "surface"],
+            ["walking-cycling", "barriers-bridges"],
+            ["road-network", "bridges"],
+            ["transit", "bridges"],
+            ["buildings", "extruded"],
+            ["admin-boundaries", "admin"],
+            ["land-and-water", "terrain-labels"],
+            ["buildings", "building-labels"],
+            ["road-network", "road-labels"],
+            ["walking-cycling", "walking-cycling-labels"],
+            ["transit", "ferry-aerialway-labels"],
+            ["natural-features", "natural-labels"],
+            ["point-of-interest-labels", "poi-labels"],
+            ["transit", "transit-labels"],
+            ["place-labels", "place-labels"]
+          ]
+        }
+      ],
+      "components": {
+        "road-network": "18.0.0",
+        "natural-features": "18.0.0",
+        "place-labels": "18.0.0",
+        "admin-boundaries": "18.0.0",
+        "point-of-interest-labels": "18.0.0",
+        "walking-cycling": "18.0.0",
+        "transit": "18.0.0",
+        "land-and-water": "18.0.0",
+        "buildings": "18.0.0"
+      },
+      "propConfig": {
+        "road-network": {
+          "colorBase": "hsl(20, 20%, 95%)",
+          "colorRoad": "hsl(0, 0%, 100%)",
+          "colorRoadOutline": "hsl(220, 20%, 85%)",
+          "colorMotorwayTrunk": "hsl(40, 90%, 70%)",
+          "colorRoadLabel": "hsl(0,0%, 0%)",
+          "turningCircles": true,
+          "roadMarkings": true
+        },
+        "natural-features": {
+          "colorBase": "hsl(20, 20%, 95%)",
+          "colorWater": "hsl(200, 100%, 80%)",
+          "colorPoi": "hsl(210, 20%, 58%)"
+        },
+        "place-labels": {
+          "colorBase": "hsl(20, 20%, 95%)",
+          "colorPlaceLabel": "hsl(220, 30%, 30%)",
+          "settlementSubdivisionsDensity": 3
+        },
+        "admin-boundaries": {
+          "colorBase": "hsl(20, 20%, 95%)",
+          "colorAdminBoundary": "hsl(240, 50%, 60%)"
+        },
+        "point-of-interest-labels": {
+          "colorPoiEntertainment": "hsl(320, 70%, 75%)",
+          "colorPoiEducation": "hsl(30, 50%, 55%)",
+          "colorPoiFoodAndDrink": "hsl(40, 95%, 55%)",
+          "poiIconScale": 0.8,
+          "colorPoi": "hsl(210, 20%, 58%)",
+          "colorPoiParkLike": "hsl(110, 70%, 40%)",
+          "colorPoiMedical": "hsl(0, 70%, 70%)",
+          "colorPoiCommercialServices": "hsl(260, 70%, 75%)",
+          "poiIconBackground": "Circle",
+          "colorPoiStoreLike": "hsl(210, 70%, 70%)",
+          "colorBase": "hsl(20, 20%, 95%)",
+          "colorPoiSportAndLeisure": "hsl(190, 60%, 60%)"
+        },
+        "walking-cycling": {
+          "colorPoi": "hsl(210, 20%, 58%)",
+          "colorBase": "hsl(20, 20%, 95%)",
+          "colorGreenspace": "hsl(110, 60%, 80%)",
+          "colorPoiParkLike": "hsl(110, 70%, 40%)",
+          "colorRoad": "hsl(0, 0%, 100%)",
+          "colorRoadOutline": "hsl(220, 20%, 85%)",
+          "colorRoadLabel": "hsl(0,0%, 0%)"
+        },
+        "transit": {
+          "poiIconBackground": "Rectangle",
+          "poiIconScale": 0.8,
+          "colorPoi": "hsl(210, 20%, 58%)",
+          "colorBase": "hsl(20, 20%, 95%)",
+          "colorTransit": "hsl(225, 60%, 58%)",
+          "colorWater": "hsl(200, 100%, 80%)",
+          "colorAirport": "hsl(225, 60%, 58%)",
+          "colorRoadOutline": "hsl(220, 20%, 85%)"
+        },
+        "land-and-water": {
+          "colorEducation": "hsl(40, 50%, 88%)",
+          "colorGreenspace": "hsl(110, 60%, 80%)",
+          "colorPoi": "hsl(210, 20%, 58%)",
+          "colorPoiParkLike": "hsl(110, 70%, 40%)",
+          "colorAirport": "hsl(225, 60%, 58%)",
+          "colorIndustrialArea": "hsl(230, 20%, 90%)",
+          "colorMedical": "hsl(0, 50%, 92%)",
+          "colorBase": "hsl(20, 20%, 95%)",
+          "colorWater": "hsl(200, 100%, 80%)",
+          "colorCommercialArea": "hsl(45, 55%, 93%)",
+          "bathymetry": true
+        },
+        "buildings": {"colorBase": "hsl(20, 20%, 95%)"}
+      }
+    }
+  },
+  "sources": {
+    "composite": {
+      "url": "mapbox://mapbox.mapbox-streets-v8,mapbox.mapbox-terrain-v2,mapbox.mapbox-bathymetry-v2",
+      "type": "vector"
+    },
+    "economy_town": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Aeconomy_town@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "economy_canal": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Aeconomy_canal@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "economy_lake": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Aeconomy_lake@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "suzhou_river": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Asuzhou_river@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "suzhou_other_river": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/cite%3Asuzhou_other_river@EPSG%3A3857@pbf/{z}/{x}/{y}.pbf"
+      ],
+      "scheme": "tms",
+      "minZoom": 0,
+      "maxZoom": 14
+    }
+  },
+  "sprite": "mapbox://styles/key563/clql1x5lg00p901qw4uqe6j95",
+  "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "land",
+      "type": "background",
+      "metadata": {
+        "mapbox:featureComponent": "land-and-water",
+        "mapbox:group": "Land & water, land"
+      },
+      "layout": {"visibility": "none"},
+      "paint": {
+        "background-color": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          9,
+          "rgb(250,252,250)",
+          11,
+          "hsl(20, 18%, 91%)"
+        ]
+      }
+    },
+    {
+      "id": "landuse",
+      "type": "fill",
+      "metadata": {
+        "mapbox:featureComponent": "land-and-water",
+        "mapbox:group": "Land & water, land"
+      },
+      "source": "composite",
+      "source-layer": "landuse",
+      "minzoom": 5,
+      "filter": [
+        "all",
+        [">=", ["to-number", ["get", "sizerank"]], 0],
+        [
+          "match",
+          ["get", "class"],
+          ["agriculture", "wood", "grass", "scrub", "glacier", "pitch", "sand"],
+          ["step", ["zoom"], false, 8, true],
+          "residential",
+          ["step", ["zoom"], true, 10, false],
+          ["park", "airport"],
+          [
+            "step",
+            ["zoom"],
+            false,
+            8,
+            ["case", ["==", ["get", "sizerank"], 1], true, false],
+            10,
+            true
+          ],
+          ["facility", "industrial"],
+          ["step", ["zoom"], false, 12, true],
+          "cemetery",
+          ["step", ["zoom"], false, 11, true],
+          "school",
+          ["step", ["zoom"], false, 11, true],
+          "hospital",
+          ["step", ["zoom"], false, 11, true],
+          "commercial_area",
+          ["step", ["zoom"], false, 11, true],
+          false
+        ],
+        [
+          "<=",
+          [
+            "-",
+            ["to-number", ["get", "sizerank"]],
+            ["interpolate", ["exponential", 1.5], ["zoom"], 12, 0, 18, 14]
+          ],
+          14
+        ]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          15,
+          [
+            "match",
+            ["get", "class"],
+            "wood",
+            "rgb(210,223,202)",
+            "scrub",
+            "hsla(110, 52%, 82%, 0.6)",
+            "agriculture",
+            "hsla(110, 55%, 88%, 0.6)",
+            "park",
+            "hsl(110, 60%, 80%)",
+            "grass",
+            "hsla(110, 55%, 88%, 0.6)",
+            "airport",
+            "hsl(225, 60%, 92%)",
+            "cemetery",
+            "hsl(110, 48%, 85%)",
+            "glacier",
+            "hsl(200, 70%, 90%)",
+            "hospital",
+            "hsl(0, 50%, 92%)",
+            "pitch",
+            "hsl(100, 70%, 85%)",
+            "sand",
+            "hsl(52, 65%, 86%)",
+            "school",
+            "hsl(40, 50%, 88%)",
+            "commercial_area",
+            "hsl(45, 55%, 93%)",
+            "residential",
+            "hsl(20, 7%, 97%)",
+            ["facility", "industrial"],
+            "hsl(230, 20%, 90%)",
+            "hsl(20, 12%, 87%)"
+          ],
+          16,
+          [
+            "match",
+            ["get", "class"],
+            "wood",
+            "hsla(115, 55%, 74%, 0.8)",
+            "scrub",
+            "hsla(110, 52%, 82%, 0.6)",
+            "agriculture",
+            "hsla(110, 55%, 88%, 0.6)",
+            "park",
+            "hsl(110, 60%, 80%)",
+            "grass",
+            "hsla(110, 55%, 88%, 0.6)",
+            "airport",
+            "hsl(225, 60%, 92%)",
+            "cemetery",
+            "hsl(110, 48%, 85%)",
+            "glacier",
+            "hsl(200, 70%, 90%)",
+            "hospital",
+            "hsl(0, 50%, 92%)",
+            "pitch",
+            "hsl(100, 70%, 85%)",
+            "sand",
+            "hsl(52, 65%, 86%)",
+            "school",
+            "hsl(40, 50%, 88%)",
+            "commercial_area",
+            "hsla(45, 55%, 93%, 0.5)",
+            ["facility", "industrial"],
+            "hsl(230, 20%, 90%)",
+            "hsl(20, 12%, 87%)"
+          ]
+        ],
+        "fill-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          7,
+          ["match", ["get", "class"], "residential", 0.8, 0.2],
+          8,
+          ["match", ["get", "class"], "residential", 0, 1]
+        ],
+        "fill-antialias": false
+      }
+    },
+    {
+      "id": "hillshade",
+      "type": "fill",
+      "metadata": {
+        "mapbox:featureComponent": "land-and-water",
+        "mapbox:group": "Land & water, land"
+      },
+      "source": "composite",
+      "source-layer": "hillshade",
+      "maxzoom": 16,
+      "filter": [
+        "all",
+        ["step", ["zoom"], ["==", ["get", "class"], "shadow"], 11, true],
+        [
+          "match",
+          ["get", "level"],
+          89,
+          true,
+          78,
+          ["step", ["zoom"], false, 5, true],
+          67,
+          ["step", ["zoom"], false, 9, true],
+          56,
+          ["step", ["zoom"], false, 6, true],
+          94,
+          ["step", ["zoom"], false, 11, true],
+          90,
+          ["step", ["zoom"], false, 12, true],
+          false
+        ]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          14,
+          [
+            "match",
+            ["get", "class"],
+            "shadow",
+            "hsla(40, 41%, 21%, 0.06)",
+            "hsla(20, 20%, 100%, 0.12)"
+          ],
+          16,
+          [
+            "match",
+            ["get", "class"],
+            "shadow",
+            "hsla(40, 41%, 21%, 0)",
+            "hsla(20, 20%, 100%, 0)"
+          ]
+        ],
+        "fill-antialias": false
+      }
+    },
+    {
+      "id": "waterway",
+      "type": "line",
+      "metadata": {
+        "mapbox:featureComponent": "land-and-water",
+        "mapbox:group": "Land & water, water"
+      },
+      "source": "composite",
+      "source-layer": "waterway",
+      "minzoom": 8,
+      "layout": {
+        "line-cap": ["step", ["zoom"], "butt", 11, "round"],
+        "line-join": ["step", ["zoom"], "miter", 11, "round"],
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.3],
+          ["zoom"],
+          9,
+          ["match", ["get", "class"], ["canal", "river"], 0.1, 0],
+          20,
+          ["match", ["get", "class"], ["canal", "river"], 8, 3]
+        ],
+        "line-opacity": ["interpolate", ["linear"], ["zoom"], 8, 0, 8.5, 1],
+        "line-color": "rgba(193,210,225, 1)"
+      }
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "metadata": {
+        "mapbox:featureComponent": "land-and-water",
+        "mapbox:group": "Land & water, water"
+      },
+      "source": "composite",
+      "source-layer": "water",
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(212,231,229, 1)"}
+    },
+    {
+      "id": "suzhou_other_river",
+      "type": "line",
+      "source": "suzhou_other_river",
+      "source-layer": "suzhou_other_river",
+      "minzoom": 8,
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(212,231,229, 1)", "line-width": 2}
+    },
+    {
+      "id": "economy_canal2",
+      "type": "line",
+      "source": "economy_canal",
+      "source-layer": "economy_canal",
+      "minzoom": 8,
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(193,210,225, 1)",
+        "line-width": 2,
+        "line-offset": -2,
+        "line-dasharray": [1, 2]
+      }
+    },
+    {
+      "id": "economy_canal",
+      "type": "line",
+      "source": "economy_canal",
+      "source-layer": "economy_canal",
+      "minzoom": 8,
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(193,210,225, 1)", "line-width": 2}
+    },
+    {
+      "id": "economy_town_icon-copy-copy",
+      "type": "symbol",
+      "source": "economy_town",
+      "source-layer": "economy_town",
+      "filter": ["all", ["==", "commercial", 1]],
+      "layout": {
+        "icon-image": "commercial_icon",
+        "icon-allow-overlap": true,
+        "icon-offset": [-9, 0]
+      }
+    },
+    {
+      "id": "economy_town_icon-copy",
+      "type": "symbol",
+      "source": "economy_town",
+      "source-layer": "economy_town",
+      "filter": ["all", ["==", "agricultur", 1]],
+      "layout": {
+        "icon-image": "agriculture_icon",
+        "icon-allow-overlap": true,
+        "icon-offset": [4, -9]
+      }
+    },
+    {
+      "id": "economy_town_icon",
+      "type": "symbol",
+      "source": "economy_town",
+      "source-layer": "economy_town",
+      "filter": ["all", ["==", "handicraft", 1]],
+      "layout": {
+        "icon-image": "handicraft_icon",
+        "icon-allow-overlap": true,
+        "icon-offset": [4, 8]
+      }
+    },
+    {
+      "id": "economy_town",
+      "type": "circle",
+      "source": "economy_town",
+      "source-layer": "economy_town",
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(255, 255, 255, 1)",
+        "circle-stroke-color": "rgba(113,112,112, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "economy_town_label_other",
+      "type": "symbol",
+      "source": "economy_town",
+      "source-layer": "economy_town",
+      "filter": ["none", ["==", "level", 1]],
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-offset": [-2, -1],
+        "text-size": 14,
+        "icon-offset": [0, 0],
+        "visibility": "visible"
+      },
+      "paint": {
+        "text-color": "rgba(137,137,137, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "economy_lake_label",
+      "type": "symbol",
+      "source": "economy_lake",
+      "source-layer": "economy_lake",
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-letter-spacing": 3,
+        "visibility": "visible"
+      },
+      "paint": {
+        "text-color": "rgba(111,155,176, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "economy_town_label",
+      "type": "symbol",
+      "source": "economy_town",
+      "source-layer": "economy_town",
+      "filter": ["all", ["==", "level", 1]],
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-offset": [0, 2],
+        "text-size": 14,
+        "visibility": "visible"
+      },
+      "paint": {
+        "text-color": "rgba(110,46,36, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1
+      }
+    }
+  ],
+  "projection": {"name": "globe"},
+  "created": "2023-09-12T08:20:32.543Z",
+  "modified": "2023-09-12T08:20:37.575Z",
+  "id": "clmg1m7xb018e01r865eddmwk",
+  "owner": "key563",
+  "visibility": "private",
+  "protected": false,
+  "draft": false
+}
