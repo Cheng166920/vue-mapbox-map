@@ -372,7 +372,7 @@
       "maxZoom": 14
     }
   },
-  "sprite": "mapbox://styles/key563/clnl7v8tt00mh01rdhffqf1kg",
+  "sprite": "mapbox://styles/key563/clql1x5lg00p901qw4uqe6j95",
   "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
   "layers": [
     {
@@ -5356,7 +5356,7 @@
   "projection": {"name": "globe"},
   "created": "2023-09-12T08:20:32.543Z",
   "modified": "2023-09-12T08:20:37.575Z",
-  "id": "clmg1m7xb018e01r865eddmwk",
+  
   "owner": "key563",
   "visibility": "private",
   "protected": false,

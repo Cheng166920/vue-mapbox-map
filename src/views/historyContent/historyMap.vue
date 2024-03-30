@@ -32,12 +32,7 @@
             
         </div>
     
-        <div class="top-popup">
-            <div class="title-content" >
-                <p>{{ title }}</p>
-                <img src="../../assets/images/jn_title.png">
-            </div>
-        </div>
+        <TitlePop :title="title"></TitlePop>
         <div v-if="historyLegend">
             <div class="szLegend-content" v-if="selectedTime === '史前'">
                 <ul class = "legend-ul">
@@ -139,12 +134,7 @@
                 <div id="chart" style="width: 98%;height:80%;margin: 10px 0;"></div>
             </div>
        </div>
-        <div class = "legend" @click="legendOpen" :class="{'active':index==0}">
-            <img src="../../assets/images/legend.png"  v-if="index ==1">
-            <img src="../../assets/images/legend-active.png"  v-if="index !=1">
-            <p>图例</p>
-        </div>
-        
+        <ButtonTool @legendOpen="legendOpen"></ButtonTool>
        <!-- 底部文本框 -->
         <div class="bottom-popup" v-if="showPopup">
             <button class="close-button" @click="closePopup">X</button>
@@ -165,6 +155,8 @@ import 'vue-slider-component/theme/default.css';
 import * as echarts from 'echarts';
 import { markRaw } from 'vue';
 import mapboxgl from 'mapbox-gl';
+import TitlePop from '../../components/TitlePop.vue';
+import ButtonTool from '../../components/ButtonTool.vue';
 
     export default {
         data: () => ({
@@ -227,7 +219,7 @@ import mapboxgl from 'mapbox-gl';
         this.$nextTick(() => {
                     // 在DOM更新后初始化ECharts
                     this.initTransportChart();
-                    });
+        });
         
       }
       
@@ -291,12 +283,6 @@ import mapboxgl from 'mapbox-gl';
                 var zoomLevel = this.map.getZoom();
                 window.alert('经度: ' + coordinates.lng + '\n纬度: ' + coordinates.lat + '\n缩放等级:' + zoomLevel);
             });
-            
-            // this.map.addControl(new MapboxLanguage({
-            //     defaultLanguage: 'zh-Hans'
-            // }));
-           
-           // this.map.addControl(new mapboxgl.NavigationControl(),'top-left');
             
             this.listenToZoom(); // 监听缩放事件
 

@@ -1,15 +1,10 @@
 <template>
-  <router-view />
+  <keep-alive><router-view /></keep-alive>
   <div class = "bag" @click = "navigationBar">
       <img src = "./assets/images/bag.png">
   </div>
   <div v-if="showBar" class="toolbar">
             <button class="close-button" @click="closeBar">X</button>
-            <!-- <div class="button-container">
-                <button v-for="item in barList" :key="item.name" @click="navigateTo(item.path)" class="page-buttom">
-                {{ item.name }}
-                </button>
-            </div> -->
             <ul class="nav-Bottom">
                 <li v-for="item in barList" :key="item.name" @click="navigateTo(item.path)">
                     <img :src="'../src/assets/images/' + item.name + '-active' + '.png'" :alt="item.name">
@@ -20,6 +15,7 @@
 </template>
 
 <script setup>
+// 导入mapbox.vue组件
 import { ref, reactive, watch } from 'vue';
 import { useMainStore } from './store/index.js';
 import { useRoute, useRouter } from 'vue-router';

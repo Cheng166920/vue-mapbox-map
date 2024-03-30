@@ -1,13 +1,8 @@
 <template>
     <div>
-        <div id="map"></div>
-        <div class="top-popup">
-            <div class="title-content" >
-                <p v-if="showJNTitle">江南区域</p>
-                <p v-if="showSZTitle">水润苏州</p>
-                <img src="../../assets/images/jn_title.png">
-            </div>
-        </div>
+        <TitlePop :title='title'></TitlePop>
+        <MapBox :mapInfo="mapInfo" @changePopup="changePopup"></MapBox>
+        <BottonTool @legendOpen="legendOpen"></BottonTool>
         <div class="jnLegend-content" v-if="jnLegend">
             <img src="../../assets/images/legend-area.png">
             <p style="font-weight: bold; padding: 2px;">江南区域</p>
@@ -40,11 +35,6 @@
                </li>
             </ul>
         </div>
-        <div class = "legend" @click="legendOpen" :class="{'active':index==0}">
-            <img src="../../assets/images/legend.png"  v-if="index ==1">
-            <img src="../../assets/images/legend-active.png"  v-if="index !=1">
-            <p>图例</p>
-        </div>
         <div class = "climate" @click="climateOpen" :class="{'active':climate==0}" v-if="index2">
             <img src="../../assets/images/climate.png"  v-if="climate ==1">
             <img src="../../assets/images/climate-active.png"  v-if="climate !=1">
@@ -54,53 +44,40 @@
         <div class="echart" v-if="showEchart">
             <div id="chart" style="width: 98%;height:80%;"></div>
         </div>
-        <!-- <div id="chart" style="position:absolute;width: 80%; height: 40%;bottom: 0rem;"></div> -->
-       <!-- 底部文本框 -->
+       
+        <!-- 底部文本框 -->
         <div class="bottom-popup" v-if="showPopup">
             <button class="close-button" @click="closePopup">X</button>
             <div class="popup-content">
-        <!-- 这里可以放置你的文本内容 -->
                 <p>江南字面意义为江之南面，其所指地区从春秋时期的长江中游逐渐向长江下游平原的南岸地区变化，根据各朝代行政边界有所调整。现代狭义即指明清太湖流域的“八府一州” 所辖区域，即苏州、松江、常州、镇江、江宁、杭州、嘉兴、湖州八府，以及由苏州府划出的太仓直隶州。自隋唐时期以来，江南逐渐成为了物产丰富、经济发达、文化昌盛的代言词。</p>
             </div>
         </div>
         <div class = "back">
             <img src = "../../assets/images/back.png" @click="backTo">
         </div>
-        <!-- <div class="bottom">
-            <ul class="nav-Bottom">
-                <li @click="jump('#/index/home',1)" :class="{'active':index1==1}">
-                    <img src="/images/location.png" v-if="index1!=1" >
-                    <img src="/images/location-active.png" v-if="index1==1">
-                    <br>位置
-                </li>
-                <li @click="jump('#/index/culture',2)" :class="{'active':index1==2}">
-                    <img src="/images/culture.png" v-if="index1!=2">
-                    <img src="/images/culture-active.png" v-if="index1==2">
-                    <br>文化
-                </li>
-                <li @click="jump('#/index/history',3)" :class="{'active':index1==3}">
-                    <img src="/images/history.png" v-if="index1!=3">
-                    <img src="/images/history-active.png" v-if="index1==3">
-                    <br>历史
-                </li>
-            </ul>
-        </div> -->
     </div>
 </template>
 <script setup>
-//import axios from 'axios';
-//import Light from "light";
+import MapBox from '../../components/MapBox.vue';
+import TitlePop from '../../components/TitlePop.vue';
+import BottonTool from '../../components/ButtonTool.vue';
 import * as echarts from 'echarts';
 import { markRaw } from 'vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { onMounted, onBeforeUnmount, nextTick } from 'vue';
-import mapboxgl from 'mapbox-gl';
 
-const map = ref(null);
+//const path = '/src/assets/json/streets.json';
+const mapInfo = {
+    path:'/src/assets/json/streets.json',
+    center: [120.2, 30.9],
+    minZoom: 3,
+    zoom: 6.5,
+    maxZoom: 18
+}
+let title = ref('江南区域');
 const showPopup = ref(false);
-const showJNTitle = ref(true);
-const showSZTitle = ref(false);
+const zoomLevel = ref(0);
 const index = ref(1);
 const jnLegend = ref(false);
 const szLegend = ref(false);
@@ -114,62 +91,32 @@ const backTo = () => {
     router.push('/history');
 };
 
-const ump = (link, index1) => {
-    location.href = link;
-    index1.value = index1;
-};
-
-const initMap = () => {
-    mapboxgl.accessToken = 'pk.eyJ1Ijoia2V5NTYzIiwiYSI6ImNsbHg1N25iYjFtb28zbHBoYzZza3hvdjYifQ.kIhZshouuoSoMk3K8kNimQ';
-    map.value = new mapboxgl.Map({
-        container: 'map',
-        style: '/src/assets/json/streets.json',
-        center: [120.2, 30.9],
-        minZoom: 6,
-        zoom: 6.5
-    });
-
-    map.value.on('zoom', listenToZoom);
-};
-
-const listenToZoom = () => {
-    const zoomLevel = map.value.getZoom();
+const changePopup = (zoom) => {
     const showPopupZoomThreshold = 7.5;
-
-    if (zoomLevel < showPopupZoomThreshold) {
+    zoomLevel.value = zoom;
+    if (zoom < showPopupZoomThreshold) {
         showPopup.value = true;
         index2.value = false;
-        showJNTitle.value = true;
-        showSZTitle.value = false;
-        showEchart.value = false;
-        climate.value = 1;
-        if (szLegend.value) {
-            szLegend.value = false;
-            index.value = 1;
-        }
+        title.value = '江南区域';
+
     } else {
         showPopup.value = false;
         index2.value = true;
-        showJNTitle.value = false;
-        showSZTitle.value = true;
-        if (jnLegend.value) {
-            jnLegend.value = false;
-            index.value = 1;
-        }
+        title.value = '水润苏州';
     }
-};
+    
+}
 
 const closePopup = () => {
     showPopup.value = false;
 };
 
 const legendOpen = () => {
-    const zoomLevel = map.value.getZoom();
     const showPopupZoomThreshold = 7.5;
 
     if (index.value == 1) {
         index.value = 0;
-        if (zoomLevel < showPopupZoomThreshold) {
+        if (zoomLevel.value < showPopupZoomThreshold) {
             jnLegend.value = true;
             szLegend.value = false;
         } else {
@@ -183,14 +130,7 @@ const legendOpen = () => {
     }
 };
 
-
 const climateOpen = () => {
-    const zoomLevel = map.value.getZoom();
-    // 设置显示文本框的缩放级别阈值
-    const showPopupZoomThreshold = 7.5;
-
-    // 根据缩放级别控制文本框的显示/隐藏
-    
     if(climate.value == 1) {
         climate.value = 0;
         showEchart.value = true;
@@ -316,7 +256,6 @@ const resizeChart = () => {
 };
 
 onMounted(() => {
-    initMap();
     window.addEventListener('resize', resizeChart);
 });
 
@@ -326,13 +265,7 @@ onBeforeUnmount(() => {
 
 </script>
 <style lang="less" scoped>
-#map { position:absolute;top:0rem;bottom:0rem; width:100%; } 
-.mapboxgl-ctrl {
-    display: none !important;
-}
-.mapboxgl-ctrl-top-left {
-    top: 42px; /* 调整控件向下的偏移量，根据需要进行调整 */
-}
+
 .popup-content {
   /* 可以根据需要设置文本框内容的样式 */
   font-size: 30px;
@@ -371,7 +304,6 @@ onBeforeUnmount(() => {
   cursor: pointer;
   margin-right: 10px; /* 调整按钮与文本框之间的间距 */
 }
-
 
 
 .jnLegend-content {

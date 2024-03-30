@@ -36,7 +36,6 @@
 </template>
 
 <script setup>
-//import LightSDK from "light-sdk"
 import { useMainStore } from '../../store/index.js'
 import { ref, watch, computed } from 'vue'
 import { useRouter } from 'vue-router'
@@ -44,60 +43,60 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const counterStore = useMainStore();
 const image1 = "../src/assets/images/ticket1.jpg";
-    const image2 = "../src/assets/images/ticket2.jpg";
-    const isSwiping = ref(false);
-    const startSwipeX = ref(0);
-    const image2X = ref(0);
-    const image2Rotation = ref(0);
-    const showSuccessText = ref(false); // 控制检票成功文字的显示
-    const showTicket = ref(false);
+const image2 = "../src/assets/images/ticket2.jpg";
+const isSwiping = ref(false);
+const startSwipeX = ref(0);
+const image2X = ref(0);
+const image2Rotation = ref(0);
+const showSuccessText = ref(false); // 控制检票成功文字的显示
+const showTicket = ref(false);
 
-    const image2Style = computed(() => {
-      return {
-        transform: `translateX(${image2X.value}px) rotate(${image2Rotation.value}deg)`,
-      };
-    });
-    const startSwipe = (event) => {
-      isSwiping.value = true;
-      startSwipeX.value = event.touches[0].clientX;
-    };
+const image2Style = computed(() => {
+  return {
+    transform: `translateX(${image2X.value}px) rotate(${image2Rotation.value}deg)`,
+  };
+});
+const startSwipe = (event) => {
+  isSwiping.value = true;
+  startSwipeX.value = event.touches[0].clientX;
+};
 
-    const swipeImage = (event) => {
-      if (isSwiping.value) {
-        const deltaX = event.touches[0].clientX - startSwipeX.value;
-        image2X.value += deltaX;
-        startSwipeX.value = event.touches[0].clientX;
+const swipeImage = (event) => {
+  if (isSwiping.value) {
+    const deltaX = event.touches[0].clientX - startSwipeX.value;
+    image2X.value += deltaX;
+    startSwipeX.value = event.touches[0].clientX;
 
-        // Add a slight clockwise rotation
-        image2Rotation.value += 1;
-      }
-    };
+    // Add a slight clockwise rotation
+    image2Rotation.value += 1;
+  }
+};
 
-    const endSwipe = () => {
-      isSwiping.value = false;
-      // 手指抬起后显示"检票成功"文字
-      showSuccessText.value = true;
-    };
+const endSwipe = () => {
+  isSwiping.value = false;
+  // 手指抬起后显示"检票成功"文字
+  showSuccessText.value = true;
+};
 
-    const rectangleClicked = () => {
-      showTicket.value = !showTicket.value;
-      let param = { name: "history", path: "/historyMap", meaning: "历史" };
-      counterStore.addToMyArray(param);
-      //LightSDK.native.writeData(params);
+const rectangleClicked = () => {
+  showTicket.value = !showTicket.value;
+  let param = { name: "history", path: "/historyMap", meaning: "历史" };
+  counterStore.addToMyArray(param);
+  //LightSDK.native.writeData(params);
 
-    };
+};
 
-    const navigateToAnotherPage = () => {
-      router.push('/historyMap');
-    };
+const navigateToAnotherPage = () => {
+  router.push('/historyMap');
+};
 
-    watch(showSuccessText, (newVal) => {
-      if (newVal) {
-        setTimeout(() => {
-          navigateToAnotherPage(); // 在1秒后跳转到另一个页面
-        }, 1500); // 1000毫秒 = 1秒
-      }
-    });
+watch(showSuccessText, (newVal) => {
+  if (newVal) {
+    setTimeout(() => {
+      navigateToAnotherPage(); // 在1秒后跳转到另一个页面
+    }, 1500); // 1000毫秒 = 1秒
+  }
+});
 </script>
 
 <style lang="less" scoped>

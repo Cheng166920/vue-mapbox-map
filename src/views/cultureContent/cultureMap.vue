@@ -1,19 +1,10 @@
 <template>
     <div>
-        <div id="map"></div>
-        <div class="top-popup">
-            <div class="title-content" >
-                <p v-if="showCulture">苏州文化</p>
-                <p v-if="showHouse">枕水民居</p>
-                <p v-if="showDiet">鱼米之乡</p>
-                <p v-if="showCustom">民风民俗</p>
-                <img src="../../assets/images/jn_title.png">
-            </div>
-        </div>
+        <MapBox :mapInfo="mapInfo" @listenToClick="listenToClick" @listenToBound="listenToBound"></MapBox>
+        <TitlePop :title='title'></TitlePop>
         <div class = "back">
             <img src = "../../assets/images/back.png" @click="backTo">
         </div>
-        <!-- <div id="chart" style="position:absolute;width: 80%; height: 40%;bottom: 0rem;"></div> -->
        <!-- 底部文本框 -->
         <div class="bottom-popup" v-if="showPopup">
             <button class="close-button" @click="closePopup">X</button>
@@ -35,7 +26,6 @@
                     <div class="diamond"></div>
                     <h2>{{ customTitle }}</h2>
                 </div>
-                
                 <table>
                     <tr v-for="(row, rowIndex) in Math.ceil(customElements.length / 2)" :key="rowIndex">
                         <td v-for="(element, colIndex) in 2" :key="colIndex">
@@ -52,10 +42,21 @@
 </template>
 <script>
 import * as turf from '@turf/turf';
-import mapboxgl from 'mapbox-gl';
-    export default {
-        data: () => ({
+// import mapboxgl from 'mapbox-gl';
+import TitlePop from '../../components/TitlePop.vue';
+import MapBox from '../../components/MapBox.vue';
+
+export default {
+    data: () => ({
         map: null,
+        mapInfo: {
+            path: '/src/assets/json/culture.json',
+            center: [90, 10],
+            minZoom: 1,
+            zoom: 1,
+            maxZoom: 3,
+        },
+        path: '/src/assets/json/culture.json',
         showPopup: false,// 控制文本框的显示状态
         showCustomPopup: false,
         showCulture:true,
@@ -65,6 +66,7 @@ import mapboxgl from 'mapbox-gl';
         popupText: "",
         popupTitle:"",
         imageFileName:"",
+        title:"苏州文化",
         popupList: [
             { name: "house_hjpx", title: "河街平行", description: "河街平行，宅在街边，小巷迂回曲折，“小浜别派，旁夹路衢”。" },
             { name: "house_xdsz", title: "下店上宅", description: "小河居中，两岸屋宇，水栈、河埠嵌筑其间，拾级而下可就水而洗，或有廊桥连接两岸，是谓水巷(水街)。" },
@@ -90,167 +92,110 @@ import mapboxgl from 'mapbox-gl';
         backTo(){
             this.$router.push('/');
         },
-        initMap() {
-            mapboxgl.accessToken = 'pk.eyJ1Ijoia2V5NTYzIiwiYSI6ImNsbHg1N25iYjFtb28zbHBoYzZza3hvdjYifQ.kIhZshouuoSoMk3K8kNimQ'; 
-            this.map = new mapboxgl.Map({
-                container: 'map',
-                style: '/src/assets/json/culture.json',
-                center: [90, 10],
-                minZoom: 1,
-                maxZoom: 3,
-                zoom: 1
-            });
-            // this.map.on('click', (e) => {
-            //     var coordinates = e.lngLat;
-            //     var zoomLevel = this.map.getZoom();
-            //     window.alert('经度: ' + coordinates.lng + '\n纬度: ' + coordinates.lat + '\n缩放等级:' + zoomLevel);
-            // });
-            
-           
-            //this.map.addControl(new mapboxgl.NavigationControl(),'top-left');
-            this.listenToClick();//监听点击事件
-            this.listenToZoom(); // 监听缩放事件
-            this.listenToBound();//监听视图范围事件
 
-        },
-        // 监听地图缩放事件
-        listenToZoom() {
-        this.map.on('zoom', () => {
-            // 获取当前缩放级别
-            const zoomLevel = this.map.getZoom();
-            // 设置显示文本框的缩放级别阈值
-            const showPopupZoomThreshold = 7.5;
+        listenToBound(map) {
+            // 获取当前地图范围、缩放级别等信息
+            var zoom = map.getZoom();
+            var bounds = map.getBounds();
+            var polygon = turf.polygon([[
+                [bounds.getWest(), bounds.getSouth()],
+                [bounds.getEast(), bounds.getSouth()],
+                [bounds.getEast(), bounds.getNorth()],
+                [bounds.getWest(), bounds.getNorth()],
+                [bounds.getWest(), bounds.getSouth()]
+            ]]);
+            var customPolygon = turf.polygon([[
+                [0, 10],
+                [180, 10],
+                [180, -90],
+                [0, -90],
+                [0, 10]
+            ]]);
+            var housePolygon = turf.polygon([[
+                [0, 90],
+                [105, 90],
+                [105, 10],
+                [0, 10],
+                [0, 90]
+            ]]);
+            var dietPolygon = turf.polygon([[
+                [105, 90],
+                [180, 90],
+                [180, 10],
+                [105, 10],
+                [105, 90]
+            ]]);
 
-            // 根据缩放级别控制文本框的显示/隐藏
-            if (zoomLevel < showPopupZoomThreshold) {
-            this.showJNTitle = true;
-            this.showSZTitle = false;
+            var maxIntersectionArea = 0;
+            var maxIntersectionPolygon = null;
 
-            } else {
-            this.showJNTitle =false;
-            this.showSZTitle = true;
+            // 判断与 customPolygon 的交集
+            var customIntersection = turf.intersect(polygon, customPolygon);
+            if (customIntersection) {
+                var intersectionArea = turf.area(customIntersection);
+                if (intersectionArea > maxIntersectionArea) {
+                    maxIntersectionArea = intersectionArea;
+                    maxIntersectionPolygon = 'custom';
+                }
             }
-        });
+
+            // 判断与 housePolygon 的交集
+            var houseIntersection = turf.intersect(polygon, housePolygon);
+            if (houseIntersection) {
+                var intersectionArea = turf.area(houseIntersection);
+                if (intersectionArea > maxIntersectionArea) {
+                    maxIntersectionArea = intersectionArea;
+                    maxIntersectionPolygon = 'house';
+                }
+            }
+
+            // 判断与 dietPolygon 的交集
+            var dietIntersection = turf.intersect(polygon, dietPolygon);
+            if (dietIntersection) {
+                var intersectionArea = turf.area(dietIntersection);
+                if (intersectionArea > maxIntersectionArea) {
+                    maxIntersectionArea = intersectionArea;
+                    maxIntersectionPolygon = 'diet';
+                }
+            }
+
+            // 根据这些信息更新标签的内容
+            if(zoom <=1.5){
+                // this.showCulture = true;
+                // this.showHouse = false;
+                // this.showDiet = false;
+                // this.showCustom = false;
+                this.title = '苏州文化';
+            }
+            else{
+                // 最终根据 maxIntersectionPolygon 更新显示状态
+                if (maxIntersectionPolygon === 'custom') {
+                    this.title = '民风民俗';
+                } else if (maxIntersectionPolygon === 'house') {
+                    this.title = '枕水民居';
+                } else if (maxIntersectionPolygon === 'diet') {
+                    this.title = '鱼米之乡';
+                } else {
+                    this.title = '苏州文化';
+                }
+
+            }
+            
         },
 
-        listenToBound() {
-            this.map.on('moveend', () => {
-                // 获取当前地图范围、缩放级别等信息
-                var zoom = this.map.getZoom();
-                var bounds = this.map.getBounds();
-                var polygon = turf.polygon([[
-                    [bounds.getWest(), bounds.getSouth()],
-                    [bounds.getEast(), bounds.getSouth()],
-                    [bounds.getEast(), bounds.getNorth()],
-                    [bounds.getWest(), bounds.getNorth()],
-                    [bounds.getWest(), bounds.getSouth()]
-                ]]);
-                var customPolygon = turf.polygon([[
-                    [0, 10],
-                    [180, 10],
-                    [180, -90],
-                    [0, -90],
-                    [0, 10]
-                ]]);
-                var housePolygon = turf.polygon([[
-                    [0, 90],
-                    [105, 90],
-                    [105, 10],
-                    [0, 10],
-                    [0, 90]
-                ]]);
-                var dietPolygon = turf.polygon([[
-                    [105, 90],
-                    [180, 90],
-                    [180, 10],
-                    [105, 10],
-                    [105, 90]
-                ]]);
-
-                var maxIntersectionArea = 0;
-                var maxIntersectionPolygon = null;
-
-                // 判断与 customPolygon 的交集
-                var customIntersection = turf.intersect(polygon, customPolygon);
-                if (customIntersection) {
-                    var intersectionArea = turf.area(customIntersection);
-                    if (intersectionArea > maxIntersectionArea) {
-                        maxIntersectionArea = intersectionArea;
-                        maxIntersectionPolygon = 'custom';
-                    }
-                }
-
-                // 判断与 housePolygon 的交集
-                var houseIntersection = turf.intersect(polygon, housePolygon);
-                if (houseIntersection) {
-                    var intersectionArea = turf.area(houseIntersection);
-                    if (intersectionArea > maxIntersectionArea) {
-                        maxIntersectionArea = intersectionArea;
-                        maxIntersectionPolygon = 'house';
-                    }
-                }
-
-                // 判断与 dietPolygon 的交集
-                var dietIntersection = turf.intersect(polygon, dietPolygon);
-                if (dietIntersection) {
-                    var intersectionArea = turf.area(dietIntersection);
-                    if (intersectionArea > maxIntersectionArea) {
-                        maxIntersectionArea = intersectionArea;
-                        maxIntersectionPolygon = 'diet';
-                    }
-                }
-
-                // 根据这些信息更新标签的内容
-                if(zoom <=1.5){
-                    this.showCulture = true;
-                    this.showHouse = false;
-                    this.showDiet = false;
-                    this.showCustom = false;
-                }
-                else{
-                    // 最终根据 maxIntersectionPolygon 更新显示状态
-                    if (maxIntersectionPolygon === 'custom') {
-                        this.showCustom = true;
-                        this.showCulture = false;
-                        this.showHouse = false;
-                        this.showDiet = false;
-                    } else if (maxIntersectionPolygon === 'house') {
-                        this.showHouse = true;
-                        this.showCustom = false;
-                        this.showCulture = false;
-                        this.showDiet = false;
-                    } else if (maxIntersectionPolygon === 'diet') {
-                        this.showDiet = true;
-                        this.showHouse = false;
-                        this.showCustom = false;
-                        this.showCulture = false;
-                    } else {
-                        this.showCulture = true;
-                        this.showHouse = false;
-                        this.showDiet = false;
-                        this.showCustom = false;
-                    }
-
-                }
-            });
-        },
-
-        listenToClick(){
+        listenToClick(map, e) {
+            console.log(e.lngLat.lng, e.lngLat.lat);
             let layers;
-            this.map.on('style.load', () => {
-                layers = this.map.getStyle().layers;
-                console.log('Layers in the current map style:', layers);
-            })
-
-            this.map.on('click', (e) => {
-                if(layers){
+            layers = map.getStyle().layers;
+            console.log('Layers in the current map style:', layers);
+            if(layers){
                     layers.forEach((layer) => {
                         const rasterLayerName = layer.id;
                         if (rasterLayerName == 'composite' || rasterLayerName == 'custom-image') {
                             // 跳过当前循环
                             return;
                         }
-                        const rasterSource = this.map.getSource(rasterLayerName);
+                        const rasterSource = map.getSource(rasterLayerName);
                         if(rasterSource){
                             const coordinates = rasterSource.coordinates;
                             if (coordinates) {
@@ -266,14 +211,11 @@ import mapboxgl from 'mapbox-gl';
                             }
                         }
                     })
-                }
-                
-            });
-
+            }   
         },
         showMessage(rasterLayerName){
             
-           // const house = ['house_hjpx','house_xdsz','house_qdhz','house_qdhf']
+            // const house = ['house_hjpx','house_xdsz','house_qdhz','house_qdhf']
             if(rasterLayerName == 'restaurant'){
                 this.$router.push('/cultureRestaurant');
             }
@@ -311,23 +253,11 @@ import mapboxgl from 'mapbox-gl';
         },
 
 
-       
-    },
-    mounted() {
-        this.initMap();
         
-    },
-    beforeDestroy() {
-    // 7. 在组件销毁前移除窗口大小变化事件监听器，以防止内存泄漏
-        window.removeEventListener('resize', this.resizeChart);
     }
-    }
+}
 </script>
 <style lang="less" scoped>
-#map { position:absolute;top:0rem;bottom:0rem; width:100%; } 
-.mapboxgl-ctrl-top-left {
-    top: 42px; /* 调整控件向下的偏移量，根据需要进行调整 */
-}
 .popup-content {
   /* 可以根据需要设置文本框内容的样式 */
   font-size: 30px;
@@ -466,9 +396,6 @@ import mapboxgl from 'mapbox-gl';
     font-size: small;
     margin-left: 6px;
 }
-
-
-
 
 .back {
   position: absolute;
