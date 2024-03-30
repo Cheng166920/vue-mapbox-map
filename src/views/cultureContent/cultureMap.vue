@@ -56,13 +56,8 @@ export default {
             zoom: 1,
             maxZoom: 3,
         },
-        path: '/src/assets/json/culture.json',
         showPopup: false,// 控制文本框的显示状态
         showCustomPopup: false,
-        showCulture:true,
-        showHouse:false,
-        showDiet:false,
-        showCustom:false,
         popupText: "",
         popupTitle:"",
         imageFileName:"",

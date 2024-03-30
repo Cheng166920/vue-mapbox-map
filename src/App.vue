@@ -1,5 +1,5 @@
 <template>
-  <keep-alive><router-view /></keep-alive>
+  <keep-alive><router-view/></keep-alive>
   <div class = "bag" @click = "navigationBar">
       <img src = "./assets/images/bag.png">
   </div>

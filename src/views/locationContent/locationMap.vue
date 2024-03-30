@@ -3,6 +3,7 @@
         <TitlePop :title='title'></TitlePop>
         <MapBox :mapInfo="mapInfo" @changePopup="changePopup"></MapBox>
         <BottonTool @legendOpen="legendOpen"></BottonTool>
+        
         <div class="jnLegend-content" v-if="jnLegend">
             <img src="../../assets/images/legend-area.png">
             <p style="font-weight: bold; padding: 2px;">江南区域</p>
@@ -265,7 +266,6 @@ onBeforeUnmount(() => {
 
 </script>
 <style lang="less" scoped>
-
 .popup-content {
   /* 可以根据需要设置文本框内容的样式 */
   font-size: 30px;
