@@ -85,6 +85,7 @@ const showSuzhou = () => {
     padding: 20px; /* 文本框内边距 */
     text-align: center;
     line-height: normal;
+    
     animation: slide-in 2s ease forwards; 
   }
   @keyframes slide-in {
@@ -95,13 +96,14 @@ const showSuzhou = () => {
     }
     
     100% {
-      bottom: 10%; /* 结束时在垂直中间 */
+      bottom: 60%; /* 结束时在垂直中间 */
       opacity: 1; /* 逐渐可见 */
     }
   }
   .text-box p {
-    font-size: 27px; /* 文字大小 */
-    color: #000; /* 文字颜色 */
+    font-size: 30px; /* 文字大小 */
+    
+    color: #000000; /* 文字颜色 */
     /* 可以根据需要添加更多样式 */
   }
 

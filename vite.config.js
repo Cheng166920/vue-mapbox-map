@@ -23,20 +23,7 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [
-        postcsspxtoviewport({
-          unitToConvert: 'px',
-          viewportWidth: 375,
-          unitPrecision: 6,
-          propList: ['*'],
-          viewportUnit: 'vw',
-          fontViewportUnit: 'vw',
-          selectorBlackList: ['ignore-'],
-          minPixelValue: 1,
-          mediaQuery: false,
-          replace: true,
-          exclude: [/^(?!.*node_modules\/vant)/],
-          landscape: false
-        }),
+       
         postcsspxtoviewport({
           // 要转化的单位
           unitToConvert: 'px',

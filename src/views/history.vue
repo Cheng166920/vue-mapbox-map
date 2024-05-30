@@ -12,7 +12,7 @@
     </div>
 </template>
   
-<script setup>
+<script setup scope>
 import { useRouter } from 'vue-router'
 const router = useRouter()
 

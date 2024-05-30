@@ -6,7 +6,7 @@
   <div v-if="showBar" class="toolbar">
             <button class="close-button" @click="closeBar">X</button>
             <ul class="nav-Bottom">
-                <li v-for="item in barList" :key="item.name" @click="navigateTo(item.path)">
+                <li v-for="item in params" :key="item.name" @click="navigateTo(item.path)">
                     <img :src="'../src/assets/images/' + item.name + '-active' + '.png'" :alt="item.name">
                     <br>{{ item.meaning }}
                 </li>
@@ -16,32 +16,37 @@
 
 <script setup>
 // 导入mapbox.vue组件
-import { ref, reactive, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { useMainStore } from './store/index.js';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 
-const index = ref(1);
+const { params } = useMainStore();
+
+// const index = ref(1);
 const showBar = ref(false);
-const barList = ref([]);
-const addedItems = reactive({});
+// const barList = ref([]);
+// const addedItems = reactive({});
 
 const router = useRouter(); // 创建 router 实例
 
 const navigationBar = () => {
-    const counterStore = useMainStore();
-    const params = counterStore.params;
-    for (const item of params) {
-        const key = item.name;
-        if (!addedItems[key]) {
-            if (key == 'location' || key == 'culture' || key == 'history') {
-                barList.value.push({ 'name': item.name, 'path': item.path , 'meaning': item.meaning});
-                addedItems[key] = true;
-            }
-        }
+    showBar.value = !showBar.value;
+    console.log(params.value);
+    if (!params.value) {
+        showBar.value = false;
     }
-    if (barList.value.length > 0) {
-        showBar.value = true;
-    }
+    // const counterStore = useMainStore();
+    // const params = counterStore.params;
+    // for (const item of params) {
+    //     const key = item.name;
+    //     if (!addedItems[key]) {
+    //         if (key == 'location' || key == 'culture' || key == 'history') {
+    //             barList.value.push({ 'name': item.name, 'path': item.path , 'meaning': item.meaning});
+    //             addedItems[key] = true;
+    //         }
+    //     }
+    // }
+    
 };
 
 const navigateTo = (path) => {

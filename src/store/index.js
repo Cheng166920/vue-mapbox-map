@@ -11,7 +11,6 @@ export const useMainStore =  defineStore('main',{
     // 2. 必须是箭头函数，这样是为了更好的 TS 类型推导
     state:()=>{
         return {
-            info:"pinia 可以使用",
             params: []
         }
     },
