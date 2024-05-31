@@ -31,8 +31,8 @@ const router = useRouter(); // 创建 router 实例
 
 const navigationBar = () => {
     showBar.value = !showBar.value;
-    console.log(params.value);
-    if (!params.value) {
+    console.log(params);
+    if (params.length === 0) {
         showBar.value = false;
     }
     // const counterStore = useMainStore();

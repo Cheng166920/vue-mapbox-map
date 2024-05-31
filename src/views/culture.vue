@@ -23,6 +23,7 @@ const counterStore = useMainStore();
 const goToCulture = () => {
   const param = {name: "culture", path: "/cultureMap", meaning: "文化"}
   counterStore.addToMyArray(param);
+  console.log(counterStore.params)
   router.push('/cultureMap');
 }
   

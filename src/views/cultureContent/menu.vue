@@ -145,8 +145,10 @@ const backTo = () => {
 }
 .title {
     position: relative;
+    margin-top: 20px;
     background-color: rgba(255, 255, 255, 0);
     height: 3.4em;
+    display: flex;
 }
 
 .diamond {
@@ -169,7 +171,7 @@ h3 {
 .content {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 10px;
+  margin-top: 5px;
   position: relative;
   margin-bottom: 10px;
 }
